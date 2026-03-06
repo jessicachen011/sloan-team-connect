@@ -64,7 +64,7 @@ const CompleteProfile: React.FC = () => {
       {/* Header */}
       <div className="header-gradient px-5 pt-12 pb-6">
         <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-4 -ml-1">
-          <ArrowLeft size={16} /> Back
+          <ArrowLeft size={16} /><span>Back</span>
         </button>
         <div className="flex items-center gap-4">
           <AvatarChip initials={user.avatar} name={user.name} size="lg" />
