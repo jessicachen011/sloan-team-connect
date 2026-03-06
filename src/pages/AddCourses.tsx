@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
-import { Search, Check, Plus, X, ChevronRight } from "lucide-react";
+import { Search, Check, Plus, X, ChevronRight, ArrowLeft, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logoSrc from "@/assets/logo.png";
 
@@ -22,7 +22,15 @@ const AddCourses: React.FC = () => {
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <div className="header-gradient px-5 pt-12 pb-7">
-        <img src={logoSrc} alt="SloanSync" className="h-7 w-auto mb-5 brightness-0 invert opacity-90" />
+        <div className="flex items-center gap-3 mb-5">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm -ml-1"
+          >
+            <ArrowLeft size={16} />
+          </button>
+          <img src={logoSrc} alt="SloanSync" className="h-8 w-auto brightness-0 invert opacity-90" />
+        </div>
         <h1 className="text-2xl font-bold text-primary-foreground">Add your courses</h1>
         <p className="text-sm text-primary-foreground/70 mt-1">Choose the classes you want SloanSync for</p>
       </div>
@@ -77,10 +85,6 @@ const AddCourses: React.FC = () => {
                   <p className="text-sm font-semibold text-foreground leading-snug">{course.name}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">{course.professor}</p>
                   <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{course.description}</p>
-                  <div className="flex items-center gap-3 mt-2 text-[11px] text-muted-foreground">
-                    <span className="font-medium">⏱ Deadline: {course.teamFormationDeadline}</span>
-                    <span className="text-status-available font-semibold">{course.openTeamCount} open teams</span>
-                  </div>
                 </div>
                 <button
                   onClick={() => added ? removeCourse(course.id) : addCourse(course.id)}
@@ -99,8 +103,16 @@ const AddCourses: React.FC = () => {
         </div>
 
         {filtered.length === 0 && (
-          <div className="text-center py-10 text-muted-foreground text-sm">
-            No courses found. Try a different search.
+          <div className="text-center py-10 text-muted-foreground flex flex-col items-center gap-3">
+            <p className="text-sm">No courses found for "{query}".</p>
+            <p className="text-xs text-muted-foreground">Can't find your course?</p>
+            <a
+              href="mailto:support@sloansync.edu"
+              className="inline-flex items-center gap-1.5 text-primary text-sm font-semibold hover:underline"
+            >
+              <Mail size={14} />
+              Email the SloanSync admin team
+            </a>
           </div>
         )}
       </div>

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
 import { Eye, EyeOff, ArrowRight } from "lucide-react";
 import logoSrc from "@/assets/logo.png";
+import { useState } from "react";
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
@@ -28,15 +29,16 @@ const SignIn: React.FC = () => {
       <div className="header-gradient h-2 w-full" />
 
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 animate-fade-in">
-        {/* Logo */}
+        {/* Logo — large and prominent */}
         <div className="mb-10 flex flex-col items-center gap-3">
-          <img src={logoSrc} alt="SloanSync" className="h-12 w-auto" />
+          <img src={logoSrc} alt="SloanSync" className="h-20 w-auto" />
+          <h1 className="text-3xl font-extrabold text-foreground tracking-tight">SloanSync</h1>
           <p className="text-sm text-muted-foreground tracking-wide font-medium">MIT Sloan · Team Formation Platform</p>
         </div>
 
         {/* Card */}
         <div className="w-full max-w-sm bg-card rounded-2xl card-shadow p-7 border border-border">
-          <h1 className="text-xl font-bold text-foreground mb-1">Welcome back</h1>
+          <h2 className="text-xl font-bold text-foreground mb-1">Welcome back</h2>
           <p className="text-sm text-muted-foreground mb-6">Sign in with your MIT credentials</p>
 
           <form onSubmit={handleLogin} className="flex flex-col gap-4">

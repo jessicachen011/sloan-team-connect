@@ -2,31 +2,30 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
 import Layout from "@/components/Layout";
-import StatusBadge from "@/components/StatusBadge";
 import AvatarChip from "@/components/AvatarChip";
-import { ArrowLeft, Search, Users, MessageCircle, UserPlus } from "lucide-react";
+import StatusBadge from "@/components/StatusBadge";
+import { ArrowLeft, Search, Users, MessageCircle, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const ProjectTeams: React.FC = () => {
   const navigate = useNavigate();
   const { courseId, projectId } = useParams<{ courseId: string; projectId: string }>();
-  const { projects, teams, students, courses, joinTeam, setSelectedStudent, committedTeamId, setActiveConversation, conversations, currentUserId } = useApp();
-  const [joiningTeamId, setJoiningTeamId] = useState<string | null>(null);
+  const {
+    projects, teams, students, courses,
+    setSelectedStudent, committedTeamId, pendingTeamIds, requestToJoinTeam,
+    setActiveConversation, conversations, currentUserId,
+  } = useApp();
 
   const course = courses.find(c => c.id === courseId);
   const project = projects.find(p => p.id === projectId);
   const projectTeams = teams.filter(t => t.projectId === projectId);
 
-  const handleJoin = (teamId: string) => {
-    setJoiningTeamId(teamId);
-    setTimeout(() => {
-      joinTeam(teamId);
-      navigate(`/team-confirmation/${teamId}`);
-    }, 600);
-  };
+  const openTeamCount = projectTeams.filter(t => t.status === "Open" || t.status === "Partial").length;
 
   const handleMessage = (studentId: string) => {
-    const conv = conversations.find(c => c.participantIds.includes(currentUserId) && c.participantIds.includes(studentId));
+    const conv = conversations.find(c =>
+      c.participantIds.includes(currentUserId) && c.participantIds.includes(studentId)
+    );
     setActiveConversation(conv?.id ?? null);
     navigate("/messages");
   };
@@ -48,8 +47,9 @@ const ProjectTeams: React.FC = () => {
           <h1 className="text-xl font-bold text-primary-foreground mt-0.5 leading-tight">{project.title}</h1>
           <p className="text-sm text-primary-foreground/70 mt-1 leading-snug">{project.description}</p>
           <div className="flex items-center gap-4 mt-3 text-xs text-primary-foreground/80">
-            <span>{projectTeams.length} teams</span>
-            <span className="font-semibold text-primary-foreground">{project.openTeamCount} open spots</span>
+            <span>{projectTeams.length} teams total</span>
+            <span className="font-semibold text-primary-foreground">{openTeamCount} teams open</span>
+            <span className="flex items-center gap-1"><Clock size={11} /> {project.deadline}</span>
           </div>
         </div>
 
@@ -65,14 +65,14 @@ const ProjectTeams: React.FC = () => {
         </div>
 
         {/* Team cards */}
-        <div className="px-5 flex flex-col gap-4">
+        <div className="px-5 flex flex-col gap-4 pb-6">
           <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mt-1">{projectTeams.length} Teams</p>
 
           {projectTeams.map((team, i) => {
             const memberStudents = team.members.map(m => students.find(s => s.id === m.studentId)).filter(Boolean);
             const isFull = team.status === "Full";
-            const isJoining = joiningTeamId === team.id;
             const alreadyJoined = committedTeamId === team.id;
+            const isPending = pendingTeamIds.includes(team.id);
 
             return (
               <div
@@ -115,12 +115,11 @@ const ProjectTeams: React.FC = () => {
                         onClick={() => { setSelectedStudent(s.id); navigate(`/students/${s.id}`); }}
                         className="flex items-center gap-2.5 hover:bg-secondary/50 rounded-lg px-1 py-1 -mx-1 transition-all"
                       >
-                        <AvatarChip initials={s.avatar} name={s.name} size="sm" />
+                        <AvatarChip initials={s.avatar} name={s.name} size="sm" avatarUrl={s.avatarUrl} />
                         <div className="text-left flex-1 min-w-0">
                           <p className="text-xs font-semibold text-foreground leading-tight">{s.name}</p>
                           <p className="text-[10px] text-muted-foreground">{s.program} · {team.members.find(m => m.studentId === s.id)?.role}</p>
                         </div>
-                        <StatusBadge status={s.teamStatus} size="sm" />
                       </button>
                     ))}
                   </div>
@@ -139,35 +138,45 @@ const ProjectTeams: React.FC = () => {
                 )}
 
                 {/* Actions */}
-                <div className="px-4 py-3 flex items-center gap-2">
-                  {!isFull && !alreadyJoined && (
-                    <button
-                      onClick={() => handleJoin(team.id)}
-                      disabled={isJoining}
-                      className="flex-1 bg-primary text-primary-foreground font-semibold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 hover:bg-primary/90 transition-all active:scale-[0.98] disabled:opacity-70"
-                    >
-                      {isJoining ? (
-                        <span className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-                      ) : (
-                        <><UserPlus size={14} /> Join Team</>
-                      )}
-                    </button>
-                  )}
+                <div className="px-4 py-3 flex flex-col gap-2">
                   {alreadyJoined && (
-                    <div className="flex-1 text-center text-sm font-semibold text-status-available py-2.5">
+                    <div className="text-center text-sm font-semibold text-status-available py-2">
                       ✓ You're on this team
                     </div>
                   )}
-                  {!isFull && memberStudents[0] && (
-                    <button
-                      onClick={() => handleMessage(memberStudents[0]!.id)}
-                      className="w-11 h-11 border border-border rounded-xl flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
-                    >
-                      <MessageCircle size={18} />
-                    </button>
+
+                  {!isFull && !alreadyJoined && isPending && (
+                    <div className="flex flex-col items-center gap-1 py-1">
+                      <div className="w-full text-center text-sm font-semibold text-status-partial py-2 bg-status-partial-bg rounded-xl">
+                        ⏳ Request Sent · Pending Team Approval
+                      </div>
+                      <p className="text-[11px] text-muted-foreground text-center">
+                        Your request will be reviewed by current team members before you officially join.
+                      </p>
+                    </div>
                   )}
+
+                  {!isFull && !alreadyJoined && !isPending && (
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => requestToJoinTeam(team.id)}
+                        className="flex-1 bg-primary text-primary-foreground font-semibold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 hover:bg-primary/90 transition-all active:scale-[0.98]"
+                      >
+                        Request to Join
+                      </button>
+                      {memberStudents[0] && (
+                        <button
+                          onClick={() => handleMessage(memberStudents[0]!.id)}
+                          className="w-11 h-11 border border-border rounded-xl flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
+                        >
+                          <MessageCircle size={18} />
+                        </button>
+                      )}
+                    </div>
+                  )}
+
                   {isFull && (
-                    <div className="flex-1 text-center text-xs text-muted-foreground py-2 font-medium">Team is full</div>
+                    <div className="text-center text-xs text-muted-foreground py-2 font-medium">Team is full</div>
                   )}
                 </div>
               </div>
