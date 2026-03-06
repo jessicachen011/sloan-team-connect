@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const ProjectTeams: React.FC = () => {
   const navigate = useNavigate();
   const { courseId, projectId } = useParams<{ courseId: string; projectId: string }>();
-  const { projects, teams, students, courses, joinTeam, setSelectedStudent, committedTeamId, setActiveConversation, conversations, CURRENT_USER_ID } = useApp();
+  const { projects, teams, students, courses, joinTeam, setSelectedStudent, committedTeamId, setActiveConversation, conversations, currentUserId } = useApp();
   const [joiningTeamId, setJoiningTeamId] = useState<string | null>(null);
 
   const course = courses.find(c => c.id === courseId);

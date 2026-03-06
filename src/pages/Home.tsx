@@ -41,8 +41,8 @@ const Home: React.FC = () => {
               className="relative w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-all"
             >
               <Bell size={18} />
-              {totalUnread > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-yellow-400 text-[9px] font-bold text-yellow-900 flex items-center justify-center">
+            {totalUnread > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-status-partial text-status-partial-bg text-[9px] font-bold flex items-center justify-center">
                   {totalUnread}
                 </span>
               )}
