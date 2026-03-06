@@ -2,95 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* SloanSync Design System – MIT Sloan inspired
+   All colors MUST be HSL
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* MIT Crimson / Red brand palette */
+    --primary: 354 70% 38%;           /* MIT Red #A31F34 */
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 354 70% 95%;     /* soft red tint */
 
+    /* Backgrounds */
+    --background: 220 14% 97%;        /* off-white cool */
+    --foreground: 220 20% 12%;        /* near-black charcoal */
+
+    /* Cards */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 20% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 20% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Secondary / muted surfaces */
+    --secondary: 220 13% 93%;
+    --secondary-foreground: 220 20% 25%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 220 13% 93%;
+    --muted-foreground: 220 9% 50%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 354 70% 38%;
+    --accent-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 354 70% 38%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --radius: 0.75rem;
 
-    --radius: 0.5rem;
+    /* Status colors */
+    --status-available: 142 72% 36%;        /* green */
+    --status-available-bg: 142 60% 93%;
+    --status-partial: 35 95% 45%;           /* amber */
+    --status-partial-bg: 35 90% 92%;
+    --status-full: 354 70% 38%;             /* red */
+    --status-full-bg: 354 70% 95%;
+    --status-committed: 220 20% 35%;        /* slate */
+    --status-committed-bg: 220 14% 92%;
 
+    /* Surface layers */
+    --surface-1: 220 14% 97%;
+    --surface-2: 0 0% 100%;
+
+    /* Navigation */
+    --nav-height: 68px;
+
+    /* Sidebar (kept for compat) */
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-primary: 354 70% 38%;
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 354 70% 38%;
   }
 }
 
@@ -101,5 +81,51 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Status badge utilities */
+  .badge-available {
+    background-color: hsl(var(--status-available-bg));
+    color: hsl(var(--status-available));
+  }
+  .badge-partial {
+    background-color: hsl(var(--status-partial-bg));
+    color: hsl(var(--status-partial));
+  }
+  .badge-full {
+    background-color: hsl(var(--status-full-bg));
+    color: hsl(var(--status-full));
+  }
+  .badge-committed {
+    background-color: hsl(var(--status-committed-bg));
+    color: hsl(var(--status-committed));
+  }
+
+  /* Card shadow */
+  .card-shadow {
+    box-shadow: 0 1px 4px 0 hsl(220 20% 12% / 0.06), 0 4px 16px 0 hsl(220 20% 12% / 0.08);
+  }
+
+  .card-shadow-hover {
+    box-shadow: 0 4px 12px 0 hsl(220 20% 12% / 0.10), 0 8px 32px 0 hsl(220 20% 12% / 0.12);
+  }
+
+  /* Gradient header */
+  .header-gradient {
+    background: linear-gradient(135deg, hsl(354 70% 38%) 0%, hsl(354 60% 28%) 100%);
+  }
+
+  /* Page scroll padding for bottom nav */
+  .page-content {
+    padding-bottom: calc(var(--nav-height) + 16px);
   }
 }
