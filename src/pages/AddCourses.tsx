@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
 import { Search, Check, Plus, X, ChevronRight, ArrowLeft, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logoSrc from "@/assets/logo.png";
 
 const AddCourses: React.FC = () => {
   const navigate = useNavigate();
@@ -22,15 +21,13 @@ const AddCourses: React.FC = () => {
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <div className="header-gradient px-5 pt-12 pb-7">
-        <div className="flex items-center gap-3 mb-5">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm -ml-1"
-          >
-            <ArrowLeft size={16} />
-          </button>
-          <img src={logoSrc} alt="SloanSync" className="h-8 w-auto brightness-0 invert opacity-90" />
-        </div>
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-5 -ml-1"
+        >
+          <ArrowLeft size={16} />
+          <span>Back</span>
+        </button>
         <h1 className="text-2xl font-bold text-primary-foreground">Add your courses</h1>
         <p className="text-sm text-primary-foreground/70 mt-1">Choose the classes you want SloanSync for</p>
       </div>
