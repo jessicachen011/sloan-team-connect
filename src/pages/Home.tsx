@@ -94,7 +94,7 @@ const Home: React.FC = () => {
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xs font-bold text-primary/70 uppercase tracking-wider">{course.number}</span>
                       {deadlineSoon(course.teamFormationDeadline) && (
-                        <span className="text-[10px] bg-yellow-100 text-yellow-700 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <span className="text-[10px] bg-status-partial-bg text-status-partial font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
                           <Calendar size={9} /> Deadline Soon
                         </span>
                       )}

@@ -26,7 +26,7 @@ const ProjectTeams: React.FC = () => {
   };
 
   const handleMessage = (studentId: string) => {
-    const conv = conversations.find(c => c.participantIds.includes(CURRENT_USER_ID) && c.participantIds.includes(studentId));
+    const conv = conversations.find(c => c.participantIds.includes(currentUserId) && c.participantIds.includes(studentId));
     setActiveConversation(conv?.id ?? null);
     navigate("/messages");
   };
