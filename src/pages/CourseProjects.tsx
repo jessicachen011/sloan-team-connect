@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
 import Layout from "@/components/Layout";
 import { ArrowLeft, ChevronRight, FolderOpen } from "lucide-react";
