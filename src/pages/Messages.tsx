@@ -75,7 +75,7 @@ const Messages: React.FC = () => {
                     conv.unread > 0 ? "border-primary/30 bg-primary/5" : "border-border"
                   )}
                 >
-                  <AvatarChip initials={other.avatar} name={other.name} size="md" />
+                  <AvatarChip initials={other.avatar} name={other.name} size="md" avatarUrl={other.avatarUrl} />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
                       <p className={cn("text-sm font-semibold text-foreground", conv.unread > 0 && "font-bold")}>{other.name}</p>
@@ -113,14 +113,18 @@ const Messages: React.FC = () => {
             onClick={() => setActiveConversation(null)}
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-3 -ml-1"
           >
-            <ArrowLeft size={16} /> Back
+            <ArrowLeft size={16} /> Back to Messages
           </button>
           {other && (
             <div className="flex items-center gap-3">
-              <AvatarChip initials={other.avatar} name={other.name} size="sm" className="!w-9 !h-9 text-xs" />
+              <AvatarChip initials={other.avatar} name={other.name} size="sm" avatarUrl={other.avatarUrl} className="!w-9 !h-9 text-xs" />
               <div>
                 <p className="font-bold text-primary-foreground text-sm">{other.name}</p>
-                <p className="text-xs text-primary-foreground/70">{other.program} · {other.teamStatus}</p>
+                {/* Online/Offline only — no team status in chat */}
+                <div className="flex items-center gap-1.5 mt-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-status-available inline-block" />
+                  <span className="text-xs text-primary-foreground/70">Online</span>
+                </div>
               </div>
               <button
                 onClick={() => { navigate(`/students/${other.id}`); }}

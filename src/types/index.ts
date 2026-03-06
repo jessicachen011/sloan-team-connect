@@ -17,7 +17,8 @@ export interface Student {
   communicationPrefs: string[];
   weeklyAvailability: string;
   teamStatus: TeamStatus;
-  avatar: string; // initials or url
+  avatar: string; // initials
+  avatarUrl?: string; // optional uploaded/selected avatar URL
   currentCourses: string[]; // course IDs
   linkedinUrl?: string;
 }
@@ -43,6 +44,7 @@ export interface Project {
   teamCount: number;
   openTeamCount: number;
   status: string;
+  deadline: string;
 }
 
 export interface TeamMember {

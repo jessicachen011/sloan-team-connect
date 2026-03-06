@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, { createContext, useContext, useState, useCallback, useRef } from "react";
 import type { Student, Team, Conversation } from "@/types";
 import {
   students as initialStudents,
@@ -22,6 +22,7 @@ interface AppState {
   selectedStudentId: string | null;
   activeConversationId: string | null;
   committedTeamId: string | null;
+  pendingTeamIds: string[];
   isOnboarded: boolean;
   isLoggedIn: boolean;
   addedCourseIds: string[];
@@ -36,10 +37,12 @@ interface AppActions {
   setSelectedStudent: (id: string | null) => void;
   setActiveConversation: (id: string | null) => void;
   joinTeam: (teamId: string) => void;
+  requestToJoinTeam: (teamId: string) => void;
   sendMessage: (conversationId: string | null, receiverId: string, content: string) => void;
   addCourse: (courseId: string) => void;
   removeCourse: (courseId: string) => void;
   updateProfile: (updates: Partial<Student>) => void;
+  updateAvatar: (avatarUrl: string) => void;
   getCurrentUser: () => Student;
 }
 
@@ -59,6 +62,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     selectedStudentId: null,
     activeConversationId: null,
     committedTeamId: null,
+    pendingTeamIds: [],
     isOnboarded: false,
     isLoggedIn: false,
     addedCourseIds: ["c1", "c3"],
@@ -85,6 +89,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }));
   }, []);
 
+  const updateAvatar = useCallback((avatarUrl: string) => {
+    setState(s => ({
+      ...s,
+      students: s.students.map(st => st.id === s.currentUserId ? { ...st, avatarUrl } : st),
+    }));
+  }, []);
+
   const joinTeam = useCallback((teamId: string) => {
     setState(s => {
       const newTeams = s.teams.map(t => {
@@ -105,6 +116,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       );
       return { ...s, teams: newTeams, students: newStudents, committedTeamId: teamId };
     });
+  }, []);
+
+  const requestToJoinTeam = useCallback((teamId: string) => {
+    setState(s => ({
+      ...s,
+      pendingTeamIds: s.pendingTeamIds.includes(teamId) ? s.pendingTeamIds : [...s.pendingTeamIds, teamId],
+    }));
   }, []);
 
   const sendMessage = useCallback((conversationId: string | null, receiverId: string, content: string) => {
@@ -145,8 +163,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     <AppContext.Provider value={{
       ...state,
       login, setOnboarded, setSelectedCourse, setSelectedProject, setSelectedTeam,
-      setSelectedStudent, setActiveConversation, joinTeam, sendMessage,
-      addCourse, removeCourse, updateProfile, getCurrentUser,
+      setSelectedStudent, setActiveConversation, joinTeam, requestToJoinTeam, sendMessage,
+      addCourse, removeCourse, updateProfile, updateAvatar, getCurrentUser,
     }}>
       {children}
     </AppContext.Provider>

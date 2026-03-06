@@ -42,8 +42,6 @@ const CourseProjects: React.FC = () => {
           <p className="text-sm text-primary-foreground/70 mt-1">{course.professor} · {course.semester}</p>
           <div className="flex items-center gap-4 mt-3 text-xs text-primary-foreground/80">
             <span className="font-medium">{courseProjects.length} projects</span>
-            <span className="font-semibold text-primary-foreground">{course.openTeamCount} open teams</span>
-            <span>⏱ Deadline: {course.teamFormationDeadline}</span>
           </div>
         </div>
 
@@ -81,6 +79,7 @@ const CourseProjects: React.FC = () => {
                       ) : (
                         <span className="text-xs font-semibold text-status-full">All full</span>
                       )}
+                      <span className="text-xs text-muted-foreground">⏱ {project.deadline}</span>
                     </div>
                   </div>
                   <ChevronRight size={18} className="text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 mt-1" />

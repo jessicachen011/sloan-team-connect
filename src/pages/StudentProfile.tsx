@@ -2,9 +2,8 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
 import Layout from "@/components/Layout";
-import StatusBadge from "@/components/StatusBadge";
 import AvatarChip from "@/components/AvatarChip";
-import { ArrowLeft, MessageCircle, Coffee, Briefcase, Clock, Zap, Globe } from "lucide-react";
+import { ArrowLeft, MessageCircle, Briefcase, Clock, Zap, Globe } from "lucide-react";
 
 const StudentProfile: React.FC = () => {
   const navigate = useNavigate();
@@ -45,12 +44,14 @@ const StudentProfile: React.FC = () => {
             <ArrowLeft size={16} /> Back
           </button>
           <div className="flex items-start gap-4">
-            <AvatarChip initials={student.avatar} name={student.name} size="lg" />
+            <AvatarChip initials={student.avatar} name={student.name} size="lg" avatarUrl={student.avatarUrl} />
             <div className="flex-1 min-w-0">
               <h1 className="text-xl font-bold text-primary-foreground leading-tight">{student.name}</h1>
               <p className="text-sm text-primary-foreground/70 mt-0.5">{student.program} · {student.education.split(",")[0]}</p>
-              <div className="mt-2">
-                <StatusBadge status={student.teamStatus} size="md" />
+              {/* Online presence only — no team status here */}
+              <div className="mt-2 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-status-available inline-block" />
+                <span className="text-xs text-primary-foreground/70 font-medium">Online</span>
               </div>
             </div>
           </div>
@@ -131,18 +132,12 @@ const StudentProfile: React.FC = () => {
         </div>
 
         {/* CTA Buttons */}
-        <div className="px-5 pb-6 pt-4 flex flex-col gap-2">
+        <div className="px-5 pb-6 pt-4">
           <button
             onClick={handleMessage}
             className="w-full bg-primary text-primary-foreground font-semibold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-primary/90 transition-all active:scale-[0.98]"
           >
             <MessageCircle size={16} /> Message {student.name.split(" ")[0]}
-          </button>
-          <button
-            onClick={handleMessage}
-            className="w-full bg-secondary text-secondary-foreground font-semibold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-secondary/70 border border-border transition-all active:scale-[0.98]"
-          >
-            <Coffee size={16} /> Invite to Coffee Chat
           </button>
         </div>
       </div>

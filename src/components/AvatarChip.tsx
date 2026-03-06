@@ -6,6 +6,8 @@ interface AvatarChipProps {
   name?: string;
   size?: "sm" | "md" | "lg";
   className?: string;
+  avatarUrl?: string;
+  onClick?: () => void;
 }
 
 const sizeMap = {
@@ -22,18 +24,24 @@ function hashString(s: string) {
   return Math.abs(hash);
 }
 
-const AvatarChip: React.FC<AvatarChipProps> = ({ initials, name = "", size = "md", className }) => {
+const AvatarChip: React.FC<AvatarChipProps> = ({ initials, name = "", size = "md", className, avatarUrl, onClick }) => {
   const color = colorMap[hashString(initials + name) % colorMap.length];
   return (
     <div
+      onClick={onClick}
       className={cn(
-        "rounded-full flex items-center justify-center font-semibold text-primary-foreground flex-shrink-0 select-none",
+        "rounded-full flex items-center justify-center font-semibold text-primary-foreground flex-shrink-0 select-none overflow-hidden",
         sizeMap[size],
-        color,
+        !avatarUrl && color,
+        onClick && "cursor-pointer",
         className
       )}
     >
-      {initials}
+      {avatarUrl ? (
+        <img src={avatarUrl} alt={name} className="w-full h-full object-cover" />
+      ) : (
+        initials
+      )}
     </div>
   );
 };

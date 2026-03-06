@@ -207,6 +207,7 @@ export const projects: Project[] = [
     teamCount: 4,
     openTeamCount: 2,
     status: "Active",
+    deadline: "Feb 10, 2025",
   },
   {
     id: "p2",
@@ -217,6 +218,7 @@ export const projects: Project[] = [
     teamCount: 4,
     openTeamCount: 2,
     status: "Active",
+    deadline: "Feb 12, 2025",
   },
   {
     id: "p3",
@@ -227,6 +229,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 1,
     status: "Filling Fast",
+    deadline: "Feb 14, 2025",
   },
   {
     id: "p4",
@@ -237,6 +240,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 1,
     status: "Active",
+    deadline: "Feb 14, 2025",
   },
   // 15.012 International Economics
   {
@@ -248,6 +252,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 2,
     status: "Active",
+    deadline: "Feb 18, 2025",
   },
   {
     id: "p6",
@@ -258,6 +263,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 1,
     status: "Filling Fast",
+    deadline: "Feb 21, 2025",
   },
   {
     id: "p7",
@@ -268,6 +274,7 @@ export const projects: Project[] = [
     teamCount: 2,
     openTeamCount: 1,
     status: "Active",
+    deadline: "Feb 21, 2025",
   },
   // 15.573 Generative AI for Managers
   {
@@ -279,6 +286,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 1,
     status: "Filling Fast",
+    deadline: "Feb 5, 2025",
   },
   {
     id: "p9",
@@ -289,6 +297,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 2,
     status: "Active",
+    deadline: "Feb 7, 2025",
   },
   {
     id: "p10",
@@ -299,6 +308,7 @@ export const projects: Project[] = [
     teamCount: 2,
     openTeamCount: 0,
     status: "Full",
+    deadline: "Feb 7, 2025",
   },
   // 15.819 Marketing Analytics
   {
@@ -310,6 +320,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 2,
     status: "Active",
+    deadline: "Feb 25, 2025",
   },
   {
     id: "p12",
@@ -320,6 +331,7 @@ export const projects: Project[] = [
     teamCount: 2,
     openTeamCount: 0,
     status: "Full",
+    deadline: "Feb 28, 2025",
   },
 ];
 
