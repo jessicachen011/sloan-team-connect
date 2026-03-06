@@ -13,7 +13,7 @@ const ProjectTeams: React.FC = () => {
   const {
     projects, teams, students, courses,
     setSelectedStudent, committedTeamId, pendingTeamIds, requestToJoinTeam,
-    setActiveConversation, conversations, currentUserId,
+    setActiveConversation, conversations, currentUserId, sendMessage,
   } = useApp();
 
   const course = courses.find(c => c.id === courseId);
@@ -22,9 +22,24 @@ const ProjectTeams: React.FC = () => {
 
   const openTeamCount = projectTeams.filter(t => t.status === "Open" || t.status === "Partial").length;
 
-  const handleMessage = (studentId: string) => {
+  // Open a 1:1 DM with a specific student
+  const handleDM = (studentId: string) => {
     const conv = conversations.find(c =>
       c.participantIds.includes(currentUserId) && c.participantIds.includes(studentId)
+    );
+    setActiveConversation(conv?.id ?? null);
+    navigate("/messages");
+  };
+
+  // Open group chat: send a stub message to the first member that isn't the current user,
+  // and navigate to messages (simulated group chat — frontend-only)
+  const handleGroupChat = (memberStudentIds: string[]) => {
+    const others = memberStudentIds.filter(id => id !== currentUserId);
+    if (others.length === 0) return;
+    // For demo: open or start a conversation with the first member
+    const firstOther = others[0];
+    const conv = conversations.find(c =>
+      c.participantIds.includes(currentUserId) && c.participantIds.includes(firstOther)
     );
     setActiveConversation(conv?.id ?? null);
     navigate("/messages");
@@ -41,7 +56,8 @@ const ProjectTeams: React.FC = () => {
             onClick={() => navigate(`/courses/${courseId}/projects`)}
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-4 -ml-1"
           >
-            <ArrowLeft size={16} /> Back to Projects
+            <ArrowLeft size={16} />
+            <span>Back to Projects</span>
           </button>
           <span className="text-xs font-bold text-primary-foreground/60 uppercase tracking-widest">{course?.number} · {project.theme}</span>
           <h1 className="text-xl font-bold text-primary-foreground mt-0.5 leading-tight">{project.title}</h1>
@@ -105,22 +121,33 @@ const ProjectTeams: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Members */}
+                {/* Members — with per-member DM button, no status labels */}
                 <div className="px-4 py-3 border-b border-border">
                   <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Members</p>
                   <div className="flex flex-col gap-2">
                     {memberStudents.map(s => s && (
-                      <button
-                        key={s.id}
-                        onClick={() => { setSelectedStudent(s.id); navigate(`/students/${s.id}`); }}
-                        className="flex items-center gap-2.5 hover:bg-secondary/50 rounded-lg px-1 py-1 -mx-1 transition-all"
-                      >
-                        <AvatarChip initials={s.avatar} name={s.name} size="sm" avatarUrl={s.avatarUrl} />
-                        <div className="text-left flex-1 min-w-0">
-                          <p className="text-xs font-semibold text-foreground leading-tight">{s.name}</p>
-                          <p className="text-[10px] text-muted-foreground">{s.program} · {team.members.find(m => m.studentId === s.id)?.role}</p>
-                        </div>
-                      </button>
+                      <div key={s.id} className="flex items-center gap-2.5">
+                        <button
+                          onClick={() => { setSelectedStudent(s.id); navigate(`/students/${s.id}`); }}
+                          className="flex items-center gap-2.5 hover:bg-secondary/50 rounded-lg px-1 py-1 -mx-1 transition-all flex-1 min-w-0"
+                        >
+                          <AvatarChip initials={s.avatar} name={s.name} size="sm" avatarUrl={s.avatarUrl} />
+                          <div className="text-left flex-1 min-w-0">
+                            <p className="text-xs font-semibold text-foreground leading-tight">{s.name}</p>
+                            <p className="text-[10px] text-muted-foreground">{s.program} · {team.members.find(m => m.studentId === s.id)?.role}</p>
+                          </div>
+                        </button>
+                        {/* Per-member 1:1 DM button */}
+                        {s.id !== currentUserId && (
+                          <button
+                            onClick={() => handleDM(s.id)}
+                            title={`Message ${s.name.split(" ")[0]}`}
+                            className="flex-shrink-0 w-7 h-7 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
+                          >
+                            <MessageCircle size={13} />
+                          </button>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -164,12 +191,18 @@ const ProjectTeams: React.FC = () => {
                       >
                         Request to Join
                       </button>
-                      {memberStudents[0] && (
+                      {/* Team-level group chat button */}
+                      {memberStudents.length > 0 && (
                         <button
-                          onClick={() => handleMessage(memberStudents[0]!.id)}
-                          className="w-11 h-11 border border-border rounded-xl flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
+                          onClick={() => handleGroupChat(memberStudents.map(s => s!.id))}
+                          title="Message the whole team"
+                          className="w-11 h-11 border border-border rounded-xl flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all relative"
                         >
                           <MessageCircle size={18} />
+                          {/* Small indicator that it's a group */}
+                          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-secondary border border-border text-[9px] font-bold flex items-center justify-center text-muted-foreground">
+                            {memberStudents.length}
+                          </span>
                         </button>
                       )}
                     </div>

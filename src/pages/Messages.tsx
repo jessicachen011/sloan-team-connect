@@ -113,7 +113,8 @@ const Messages: React.FC = () => {
             onClick={() => setActiveConversation(null)}
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-3 -ml-1"
           >
-            <ArrowLeft size={16} /> Back to Messages
+            <ArrowLeft size={16} />
+            <span>Back to Messages</span>
           </button>
           {other && (
             <div className="flex items-center gap-3">

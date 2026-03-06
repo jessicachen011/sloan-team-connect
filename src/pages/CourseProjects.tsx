@@ -35,7 +35,8 @@ const CourseProjects: React.FC = () => {
             onClick={() => navigate("/home")}
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-4 -ml-1"
           >
-            <ArrowLeft size={16} /> Back to Courses
+            <ArrowLeft size={16} />
+            <span>Back to Courses</span>
           </button>
           <span className="text-xs font-bold text-primary-foreground/60 uppercase tracking-widest">{course.number}</span>
           <h1 className="text-xl font-bold text-primary-foreground mt-0.5 leading-tight">{course.name}</h1>
@@ -75,7 +76,7 @@ const CourseProjects: React.FC = () => {
                     <div className="flex items-center gap-4 mt-3">
                       <span className="text-xs text-muted-foreground">{project.teamCount} teams total</span>
                       {project.openTeamCount > 0 ? (
-                        <span className="text-xs font-semibold text-status-available">{project.openTeamCount} open</span>
+                        <span className="text-xs font-semibold text-status-available">{project.openTeamCount} teams open</span>
                       ) : (
                         <span className="text-xs font-semibold text-status-full">All full</span>
                       )}

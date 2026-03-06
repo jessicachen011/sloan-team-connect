@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
 import Layout from "@/components/Layout";
 import { ChevronRight, Bell } from "lucide-react";
-import logoSrc from "@/assets/logo.png";
 import AvatarChip from "@/components/AvatarChip";
 
 const Home: React.FC = () => {
@@ -25,7 +24,8 @@ const Home: React.FC = () => {
         {/* Header */}
         <div className="header-gradient px-5 pt-12 pb-7">
           <div className="flex items-center justify-between mb-5">
-            <img src={logoSrc} alt="SloanSync" className="h-10 w-auto brightness-0 invert opacity-95" />
+            {/* Large SloanSync branding */}
+            <h1 className="text-3xl font-extrabold text-primary-foreground tracking-tight">SloanSync</h1>
             <button
               onClick={() => navigate("/messages")}
               className="relative w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-all"

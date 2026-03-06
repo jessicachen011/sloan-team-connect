@@ -41,14 +41,15 @@ const StudentProfile: React.FC = () => {
             onClick={() => navigate(-1)}
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-5 -ml-1"
           >
-            <ArrowLeft size={16} /> Back
+            <ArrowLeft size={16} />
+            <span>Back</span>
           </button>
           <div className="flex items-start gap-4">
             <AvatarChip initials={student.avatar} name={student.name} size="lg" avatarUrl={student.avatarUrl} />
             <div className="flex-1 min-w-0">
               <h1 className="text-xl font-bold text-primary-foreground leading-tight">{student.name}</h1>
               <p className="text-sm text-primary-foreground/70 mt-0.5">{student.program} · {student.education.split(",")[0]}</p>
-              {/* Online presence only — no team status here */}
+              {/* Online presence only — no team status */}
               <div className="mt-2 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-status-available inline-block" />
                 <span className="text-xs text-primary-foreground/70 font-medium">Online</span>
@@ -131,7 +132,7 @@ const StudentProfile: React.FC = () => {
           </Section>
         </div>
 
-        {/* CTA Buttons */}
+        {/* CTA */}
         <div className="px-5 pb-6 pt-4">
           <button
             onClick={handleMessage}
