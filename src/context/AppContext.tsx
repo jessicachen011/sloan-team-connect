@@ -39,6 +39,7 @@ interface AppActions {
   joinTeam: (teamId: string) => void;
   requestToJoinTeam: (teamId: string) => void;
   sendMessage: (conversationId: string | null, receiverId: string, content: string) => void;
+  openOrCreateDM: (receiverId: string) => string;
   addCourse: (courseId: string) => void;
   removeCourse: (courseId: string) => void;
   updateProfile: (updates: Partial<Student>) => void;
@@ -155,6 +156,33 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
   }, []);
 
+  // Opens an existing 1:1 DM or creates one and sets it active — returns the conv id
+  const openOrCreateDM = useCallback((receiverId: string): string => {
+    let convId = "";
+    setState(s => {
+      const existing = s.conversations.find(c =>
+        c.participantIds.length === 2 &&
+        c.participantIds.includes(s.currentUserId) &&
+        c.participantIds.includes(receiverId)
+      );
+      if (existing) {
+        convId = existing.id;
+        return { ...s, activeConversationId: existing.id };
+      }
+      const newConv: Conversation = {
+        id: `conv_${Date.now()}`,
+        participantIds: [s.currentUserId, receiverId],
+        messages: [],
+        lastMessage: "",
+        lastTimestamp: "Just now",
+        unread: 0,
+      };
+      convId = newConv.id;
+      return { ...s, conversations: [...s.conversations, newConv], activeConversationId: newConv.id };
+    });
+    return convId;
+  }, []);
+
   const getCurrentUser = useCallback(() => {
     return state.students.find(s => s.id === state.currentUserId)!;
   }, [state.students, state.currentUserId]);
@@ -164,7 +192,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ...state,
       login, setOnboarded, setSelectedCourse, setSelectedProject, setSelectedTeam,
       setSelectedStudent, setActiveConversation, joinTeam, requestToJoinTeam, sendMessage,
-      addCourse, removeCourse, updateProfile, updateAvatar, getCurrentUser,
+      openOrCreateDM, addCourse, removeCourse, updateProfile, updateAvatar, getCurrentUser,
     }}>
       {children}
     </AppContext.Provider>
