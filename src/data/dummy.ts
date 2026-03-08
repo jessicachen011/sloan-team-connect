@@ -407,10 +407,7 @@ export const teams: Team[] = [
     maxSize: 4,
     openRoles: ["Technical Builder"],
     workingStyleSummary: "Business-oriented, structured, communicative",
-    status: "Partial",
-  },
-  {
-    id: "t10",
+    status: "Open",
     projectId: "p2",
     name: "Model Mavericks",
     members: [
