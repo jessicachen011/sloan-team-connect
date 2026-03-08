@@ -22,33 +22,39 @@ const ProjectTeams: React.FC = () => {
 
   const openTeamCount = projectTeams.filter(t => t.status === "Open" || t.status === "Partial").length;
 
-  // Open a 1:1 DM with a specific student
+  // 1:1 DM — find existing convo or create one
   const handleDM = (studentId: string) => {
-    const conv = conversations.find(c =>
-      c.participantIds.includes(currentUserId) && c.participantIds.includes(studentId)
+    const existing = conversations.find(c =>
+      c.participantIds.length === 2 &&
+      c.participantIds.includes(currentUserId) &&
+      c.participantIds.includes(studentId)
     );
-    setActiveConversation(conv?.id ?? null);
-    navigate("/messages");
+    if (existing) {
+      setActiveConversation(existing.id);
+      navigate("/messages");
+    } else {
+      sendMessage(null, studentId, "👋 Hey! Saw you on the team — would love to connect.");
+      navigate("/messages");
+    }
   };
 
-  // Open group chat: find or create a conversation that includes the current user
-  // and ALL other team members (frontend-only group chat simulation)
+  // Group chat — find existing convo with all members or create one
   const handleGroupChat = (memberStudentIds: string[]) => {
     const allIds = Array.from(new Set([currentUserId, ...memberStudentIds]));
     const others = allIds.filter(id => id !== currentUserId);
     if (others.length === 0) return;
-    // Find an existing conversation that has exactly all these participants
     const existing = conversations.find(c =>
       allIds.every(id => c.participantIds.includes(id)) &&
       c.participantIds.length === allIds.length
     );
     if (existing) {
       setActiveConversation(existing.id);
+      navigate("/messages");
     } else {
-      // Create a new group conversation by sending a stub opening message
-      sendMessage(null, others[0], `👋 Hey team! Let's connect.`);
+      // Create group by messaging all others; uses first as receiver for the conv stub
+      sendMessage(null, others[0], "👋 Hey team! Interested in working together.");
+      navigate("/messages");
     }
-    navigate("/messages");
   };
 
   if (!project) return null;
