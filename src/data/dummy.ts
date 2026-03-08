@@ -156,8 +156,8 @@ export const courses: Course[] = [
     number: "15.003",
     description: "Hands-on statistical modeling, causal inference, and machine learning for business decisions.",
     professor: "Prof. Katherine Liu",
-    semester: "Spring 2025",
-    teamFormationDeadline: "Feb 14, 2025",
+    semester: "Spring 2026",
+    teamFormationDeadline: "Feb 14, 2026",
     projectCount: 4,
     openTeamCount: 6,
   },
@@ -167,8 +167,8 @@ export const courses: Course[] = [
     number: "15.012",
     description: "Global trade, policy, and macro dynamics with application to corporate strategy.",
     professor: "Prof. David Berger",
-    semester: "Spring 2025",
-    teamFormationDeadline: "Feb 21, 2025",
+    semester: "Spring 2026",
+    teamFormationDeadline: "Feb 21, 2026",
     projectCount: 3,
     openTeamCount: 4,
   },
@@ -178,8 +178,8 @@ export const courses: Course[] = [
     number: "15.573",
     description: "Strategic frameworks for deploying GenAI in enterprise settings, with hands-on prototyping.",
     professor: "Prof. Mira Shankar",
-    semester: "Spring 2025",
-    teamFormationDeadline: "Feb 7, 2025",
+    semester: "Spring 2026",
+    teamFormationDeadline: "Feb 7, 2026",
     projectCount: 3,
     openTeamCount: 3,
   },
@@ -189,8 +189,8 @@ export const courses: Course[] = [
     number: "15.819",
     description: "Data-driven marketing: attribution modeling, experimentation, and consumer behavior analysis.",
     professor: "Prof. Roberto Fuentes",
-    semester: "Spring 2025",
-    teamFormationDeadline: "Feb 28, 2025",
+    semester: "Spring 2026",
+    teamFormationDeadline: "Feb 28, 2026",
     projectCount: 2,
     openTeamCount: 2,
   },
@@ -207,7 +207,7 @@ export const projects: Project[] = [
     teamCount: 4,
     openTeamCount: 2,
     status: "Active",
-    deadline: "Feb 10, 2025",
+    deadline: "Feb 10, 2026",
   },
   {
     id: "p2",
@@ -218,7 +218,7 @@ export const projects: Project[] = [
     teamCount: 4,
     openTeamCount: 2,
     status: "Active",
-    deadline: "Feb 12, 2025",
+    deadline: "Feb 12, 2026",
   },
   {
     id: "p3",
@@ -229,7 +229,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 1,
     status: "Filling Fast",
-    deadline: "Feb 14, 2025",
+    deadline: "Feb 14, 2026",
   },
   {
     id: "p4",
@@ -240,9 +240,8 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 1,
     status: "Active",
-    deadline: "Feb 14, 2025",
+    deadline: "Feb 14, 2026",
   },
-  // 15.012 International Economics
   {
     id: "p5",
     courseId: "c2",
@@ -252,7 +251,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 2,
     status: "Active",
-    deadline: "Feb 18, 2025",
+    deadline: "Feb 18, 2026",
   },
   {
     id: "p6",
@@ -263,7 +262,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 1,
     status: "Filling Fast",
-    deadline: "Feb 21, 2025",
+    deadline: "Feb 21, 2026",
   },
   {
     id: "p7",
@@ -274,9 +273,8 @@ export const projects: Project[] = [
     teamCount: 2,
     openTeamCount: 1,
     status: "Active",
-    deadline: "Feb 21, 2025",
+    deadline: "Feb 21, 2026",
   },
-  // 15.573 Generative AI for Managers
   {
     id: "p8",
     courseId: "c3",
@@ -286,7 +284,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 1,
     status: "Filling Fast",
-    deadline: "Feb 5, 2025",
+    deadline: "Feb 5, 2026",
   },
   {
     id: "p9",
@@ -297,7 +295,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 2,
     status: "Active",
-    deadline: "Feb 7, 2025",
+    deadline: "Feb 7, 2026",
   },
   {
     id: "p10",
@@ -308,9 +306,8 @@ export const projects: Project[] = [
     teamCount: 2,
     openTeamCount: 0,
     status: "Full",
-    deadline: "Feb 7, 2025",
+    deadline: "Feb 7, 2026",
   },
-  // 15.819 Marketing Analytics
   {
     id: "p11",
     courseId: "c4",
@@ -320,7 +317,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 2,
     status: "Active",
-    deadline: "Feb 25, 2025",
+    deadline: "Feb 25, 2026",
   },
   {
     id: "p12",
@@ -331,7 +328,7 @@ export const projects: Project[] = [
     teamCount: 2,
     openTeamCount: 0,
     status: "Full",
-    deadline: "Feb 28, 2025",
+    deadline: "Feb 28, 2026",
   },
 ];
 
