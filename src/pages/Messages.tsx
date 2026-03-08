@@ -128,7 +128,10 @@ const Messages: React.FC = () => {
   }
 
   // Active Conversation
-  const other = getOtherParticipant(activeConv);
+  const isGroup = isGroupConv(activeConv);
+  const other = !isGroup ? getOtherParticipant(activeConv) : null;
+  const groupParts = isGroup ? getGroupParticipants(activeConv) : [];
+  const convLabel = getConvLabel(activeConv);
 
   return (
     <Layout showNav={false}>
