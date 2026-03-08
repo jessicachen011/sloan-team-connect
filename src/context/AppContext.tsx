@@ -64,6 +64,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     selectedTeamId: null,
     selectedStudentId: null,
     activeConversationId: null,
+    messageEnteredFromList: false,
     committedTeamId: null,
     pendingTeamIds: [],
     isOnboarded: false,
