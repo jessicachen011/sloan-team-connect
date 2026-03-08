@@ -41,7 +41,7 @@ const CourseProjects: React.FC = () => {
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-4 -ml-1"
           >
             <ArrowLeft size={16} />
-            <span>Back to Courses</span>
+            <span>Back</span>
           </button>
           <span className="text-xs font-bold text-primary-foreground/60 uppercase tracking-widest">{course.number}</span>
           <h1 className="text-xl font-bold text-primary-foreground mt-0.5 leading-tight">{course.name}</h1>

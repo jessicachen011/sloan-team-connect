@@ -143,7 +143,7 @@ const Messages: React.FC = () => {
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-3 -ml-1"
           >
             <ArrowLeft size={16} />
-            <span>Back to Messages</span>
+            <span>Back</span>
           </button>
           {/* 1:1 DM header */}
           {!isGroup && other && (
