@@ -230,6 +230,9 @@ export const projects: Project[] = [
     openTeamCount: 1,
     status: "Filling Fast",
     deadline: "Feb 14, 2026",
+  },
+  {
+    id: "p4",
     courseId: "c1",
     title: "Interactive Analytics Dashboard",
     description: "Design and build an interactive data visualization dashboard for business insight delivery.",
