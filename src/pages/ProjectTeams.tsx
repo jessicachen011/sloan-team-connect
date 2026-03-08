@@ -13,7 +13,7 @@ const ProjectTeams: React.FC = () => {
   const {
     projects, teams, students, courses,
     setSelectedStudent, committedTeamId, pendingTeamIds, requestToJoinTeam,
-    currentUserId, openOrCreateDM,
+    currentUserId, openOrCreateDM, openOrCreateGroupChat,
   } = useApp();
 
 
@@ -29,11 +29,10 @@ const ProjectTeams: React.FC = () => {
     navigate("/messages");
   };
 
-  // Group chat — open DM with first non-current member (simulated group)
+  // Group chat — open or create a group conversation with ALL team members
   const handleGroupChat = (memberStudentIds: string[]) => {
-    const others = memberStudentIds.filter(id => id !== currentUserId);
-    if (others.length === 0) return;
-    openOrCreateDM(others[0]);
+    const allIds = Array.from(new Set([currentUserId, ...memberStudentIds]));
+    openOrCreateGroupChat(allIds);
     navigate("/messages");
   };
 

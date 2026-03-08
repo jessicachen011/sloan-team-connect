@@ -40,6 +40,7 @@ interface AppActions {
   requestToJoinTeam: (teamId: string) => void;
   sendMessage: (conversationId: string | null, receiverId: string, content: string) => void;
   openOrCreateDM: (receiverId: string) => string;
+  openOrCreateGroupChat: (memberIds: string[]) => string;
   addCourse: (courseId: string) => void;
   removeCourse: (courseId: string) => void;
   updateProfile: (updates: Partial<Student>) => void;
@@ -183,6 +184,33 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return convId;
   }, []);
 
+  // Opens an existing group chat with exactly these members, or creates one
+  const openOrCreateGroupChat = useCallback((memberIds: string[]): string => {
+    const allIds = Array.from(new Set([...memberIds]));
+    let convId = "";
+    setState(s => {
+      const existing = s.conversations.find(c =>
+        c.participantIds.length === allIds.length &&
+        allIds.every(id => c.participantIds.includes(id))
+      );
+      if (existing) {
+        convId = existing.id;
+        return { ...s, activeConversationId: existing.id };
+      }
+      const newConv: Conversation = {
+        id: `group_${Date.now()}`,
+        participantIds: allIds,
+        messages: [],
+        lastMessage: "",
+        lastTimestamp: "Just now",
+        unread: 0,
+      };
+      convId = newConv.id;
+      return { ...s, conversations: [...s.conversations, newConv], activeConversationId: newConv.id };
+    });
+    return convId;
+  }, []);
+
   const getCurrentUser = useCallback(() => {
     return state.students.find(s => s.id === state.currentUserId)!;
   }, [state.students, state.currentUserId]);
@@ -192,7 +220,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ...state,
       login, setOnboarded, setSelectedCourse, setSelectedProject, setSelectedTeam,
       setSelectedStudent, setActiveConversation, joinTeam, requestToJoinTeam, sendMessage,
-      openOrCreateDM, addCourse, removeCourse, updateProfile, updateAvatar, getCurrentUser,
+      openOrCreateDM, openOrCreateGroupChat, addCourse, removeCourse, updateProfile, updateAvatar, getCurrentUser,
     }}>
       {children}
     </AppContext.Provider>

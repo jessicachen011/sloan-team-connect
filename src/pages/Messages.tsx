@@ -23,6 +23,18 @@ const Messages: React.FC = () => {
     return students.find(s => s.id === otherId);
   };
 
+  const isGroupConv = (conv: typeof conversations[0]) => conv.participantIds.length > 2;
+
+  const getGroupParticipants = (conv: typeof conversations[0]) =>
+    conv.participantIds.filter(id => id !== currentUserId).map(id => students.find(s => s.id === id)).filter(Boolean);
+
+  const getConvLabel = (conv: typeof conversations[0]) => {
+    if (isGroupConv(conv)) {
+      return getGroupParticipants(conv).map(s => s!.name.split(" ")[0]).join(", ");
+    }
+    return getOtherParticipant(conv)?.name ?? "Unknown";
+  };
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [activeConv?.messages.length]);
@@ -64,8 +76,11 @@ const Messages: React.FC = () => {
               </div>
             )}
             {conversations.map(conv => {
-              const other = getOtherParticipant(conv);
-              if (!other) return null;
+              const isGroup = isGroupConv(conv);
+              const other = !isGroup ? getOtherParticipant(conv) : null;
+              const label = getConvLabel(conv);
+              const groupParts = isGroup ? getGroupParticipants(conv) : [];
+              if (!isGroup && !other) return null;
               return (
                 <button
                   key={conv.id}
@@ -75,10 +90,19 @@ const Messages: React.FC = () => {
                     conv.unread > 0 ? "border-primary/30 bg-primary/5" : "border-border"
                   )}
                 >
-                  <AvatarChip initials={other.avatar} name={other.name} size="md" avatarUrl={other.avatarUrl} />
+                  {isGroup ? (
+                    <div className="relative w-10 h-10 flex-shrink-0">
+                      {groupParts.slice(0, 2).map((p, idx) => (
+                        <AvatarChip key={p!.id} initials={p!.avatar} name={p!.name} size="sm" avatarUrl={p!.avatarUrl}
+                          className={cn("!w-7 !h-7 text-[10px] absolute border-2 border-card", idx === 0 ? "top-0 left-0" : "bottom-0 right-0")} />
+                      ))}
+                    </div>
+                  ) : (
+                    <AvatarChip initials={other!.avatar} name={other!.name} size="md" avatarUrl={other!.avatarUrl} />
+                  )}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
-                      <p className={cn("text-sm font-semibold text-foreground", conv.unread > 0 && "font-bold")}>{other.name}</p>
+                      <p className={cn("text-sm font-semibold text-foreground truncate", conv.unread > 0 && "font-bold")}>{label}</p>
                       <div className="flex items-center gap-2 flex-shrink-0">
                         <span className="text-[11px] text-muted-foreground">{conv.lastTimestamp}</span>
                         {conv.unread > 0 && (
@@ -88,8 +112,10 @@ const Messages: React.FC = () => {
                         )}
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{other.program}</p>
-                    <p className={cn("text-xs mt-1 line-clamp-1", conv.unread > 0 ? "text-foreground font-medium" : "text-muted-foreground")}>{conv.lastMessage}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                      {isGroup ? `Group · ${conv.participantIds.length} members` : other!.program}
+                    </p>
+                    {conv.lastMessage && <p className={cn("text-xs mt-1 line-clamp-1", conv.unread > 0 ? "text-foreground font-medium" : "text-muted-foreground")}>{conv.lastMessage}</p>}
                   </div>
                   <ChevronRight size={16} className="text-muted-foreground flex-shrink-0" />
                 </button>
@@ -102,7 +128,10 @@ const Messages: React.FC = () => {
   }
 
   // Active Conversation
-  const other = getOtherParticipant(activeConv);
+  const isGroup = isGroupConv(activeConv);
+  const other = !isGroup ? getOtherParticipant(activeConv) : null;
+  const groupParts = isGroup ? getGroupParticipants(activeConv) : [];
+  const convLabel = getConvLabel(activeConv);
 
   return (
     <Layout showNav={false}>
@@ -116,12 +145,12 @@ const Messages: React.FC = () => {
             <ArrowLeft size={16} />
             <span>Back to Messages</span>
           </button>
-          {other && (
+          {/* 1:1 DM header */}
+          {!isGroup && other && (
             <div className="flex items-center gap-3">
               <AvatarChip initials={other.avatar} name={other.name} size="sm" avatarUrl={other.avatarUrl} className="!w-9 !h-9 text-xs" />
               <div>
                 <p className="font-bold text-primary-foreground text-sm">{other.name}</p>
-                {/* Online/Offline only — no team status in chat */}
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-status-available inline-block" />
                   <span className="text-xs text-primary-foreground/70">Online</span>
@@ -133,6 +162,23 @@ const Messages: React.FC = () => {
               >
                 View Profile
               </button>
+            </div>
+          )}
+          {/* Group chat header */}
+          {isGroup && (
+            <div className="flex items-center gap-3">
+              <div className="relative w-10 h-10 flex-shrink-0">
+                {groupParts.slice(0, 2).map((p, idx) => (
+                  <AvatarChip key={p!.id} initials={p!.avatar} name={p!.name} size="sm" avatarUrl={p!.avatarUrl}
+                    className={cn("!w-7 !h-7 text-[10px] absolute border-2 border-primary", idx === 0 ? "top-0 left-0" : "bottom-0 right-0")} />
+                ))}
+              </div>
+              <div>
+                <p className="font-bold text-primary-foreground text-sm">{convLabel}</p>
+                <p className="text-xs text-primary-foreground/70 mt-0.5">
+                  Team Chat · {activeConv.participantIds.length} members
+                </p>
+              </div>
             </div>
           )}
         </div>
