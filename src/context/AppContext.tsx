@@ -36,7 +36,7 @@ interface AppActions {
   setSelectedProject: (id: string | null) => void;
   setSelectedTeam: (id: string | null) => void;
   setSelectedStudent: (id: string | null) => void;
-  setActiveConversation: (id: string | null) => void;
+  setActiveConversation: (id: string | null, fromList?: boolean) => void;
   joinTeam: (teamId: string) => void;
   requestToJoinTeam: (teamId: string) => void;
   sendMessage: (conversationId: string | null, receiverId: string, content: string) => void;
