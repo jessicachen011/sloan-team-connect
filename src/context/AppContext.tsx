@@ -40,6 +40,7 @@ interface AppActions {
   requestToJoinTeam: (teamId: string) => void;
   sendMessage: (conversationId: string | null, receiverId: string, content: string) => void;
   openOrCreateDM: (receiverId: string) => string;
+  openOrCreateGroupChat: (memberIds: string[]) => string;
   addCourse: (courseId: string) => void;
   removeCourse: (courseId: string) => void;
   updateProfile: (updates: Partial<Student>) => void;
