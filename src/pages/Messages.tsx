@@ -76,8 +76,11 @@ const Messages: React.FC = () => {
               </div>
             )}
             {conversations.map(conv => {
-              const other = getOtherParticipant(conv);
-              if (!other) return null;
+              const isGroup = isGroupConv(conv);
+              const other = !isGroup ? getOtherParticipant(conv) : null;
+              const label = getConvLabel(conv);
+              const groupParts = isGroup ? getGroupParticipants(conv) : [];
+              if (!isGroup && !other) return null;
               return (
                 <button
                   key={conv.id}
@@ -87,10 +90,19 @@ const Messages: React.FC = () => {
                     conv.unread > 0 ? "border-primary/30 bg-primary/5" : "border-border"
                   )}
                 >
-                  <AvatarChip initials={other.avatar} name={other.name} size="md" avatarUrl={other.avatarUrl} />
+                  {isGroup ? (
+                    <div className="relative w-10 h-10 flex-shrink-0">
+                      {groupParts.slice(0, 2).map((p, idx) => (
+                        <AvatarChip key={p!.id} initials={p!.avatar} name={p!.name} size="sm" avatarUrl={p!.avatarUrl}
+                          className={cn("!w-7 !h-7 text-[10px] absolute border-2 border-card", idx === 0 ? "top-0 left-0" : "bottom-0 right-0")} />
+                      ))}
+                    </div>
+                  ) : (
+                    <AvatarChip initials={other!.avatar} name={other!.name} size="md" avatarUrl={other!.avatarUrl} />
+                  )}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
-                      <p className={cn("text-sm font-semibold text-foreground", conv.unread > 0 && "font-bold")}>{other.name}</p>
+                      <p className={cn("text-sm font-semibold text-foreground truncate", conv.unread > 0 && "font-bold")}>{label}</p>
                       <div className="flex items-center gap-2 flex-shrink-0">
                         <span className="text-[11px] text-muted-foreground">{conv.lastTimestamp}</span>
                         {conv.unread > 0 && (
@@ -100,8 +112,10 @@ const Messages: React.FC = () => {
                         )}
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{other.program}</p>
-                    <p className={cn("text-xs mt-1 line-clamp-1", conv.unread > 0 ? "text-foreground font-medium" : "text-muted-foreground")}>{conv.lastMessage}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                      {isGroup ? `Group · ${conv.participantIds.length} members` : other!.program}
+                    </p>
+                    {conv.lastMessage && <p className={cn("text-xs mt-1 line-clamp-1", conv.unread > 0 ? "text-foreground font-medium" : "text-muted-foreground")}>{conv.lastMessage}</p>}
                   </div>
                   <ChevronRight size={16} className="text-muted-foreground flex-shrink-0" />
                 </button>
