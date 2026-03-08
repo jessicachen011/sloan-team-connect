@@ -295,9 +295,7 @@ export const projects: Project[] = [
     teamCount: 2,
     openTeamCount: 0,
     status: "Full",
-    deadline: "Feb 7, 2025",
-  },
-  // 15.819 Marketing Analytics
+    deadline: "Feb 7, 2026",
   {
     id: "p11",
     courseId: "c4",
