@@ -21,7 +21,7 @@ const ProjectTeams: React.FC = () => {
   const project = projects.find(p => p.id === projectId);
   const projectTeams = teams.filter(t => t.projectId === projectId);
 
-  const openTeamCount = projectTeams.filter(t => t.status === "Open" || t.status === "Partial").length;
+  const openTeamCount = projectTeams.filter(t => t.status === "Open").length;
 
   // 1:1 DM — find or create conversation, then navigate
   const handleDM = (studentId: string) => {
@@ -106,7 +106,7 @@ const ProjectTeams: React.FC = () => {
                   {/* Progress bar */}
                   <div className="mt-3 w-full h-1.5 bg-secondary rounded-full overflow-hidden">
                     <div
-                      className={cn("h-full rounded-full transition-all", isFull ? "bg-status-full" : team.status === "Partial" ? "bg-status-partial" : "bg-status-available")}
+                      className={cn("h-full rounded-full transition-all", isFull ? "bg-status-full" : "bg-status-available")}
                       style={{ width: `${(team.currentSize / team.maxSize) * 100}%` }}
                     />
                   </div>

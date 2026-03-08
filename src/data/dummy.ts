@@ -364,7 +364,7 @@ export const teams: Team[] = [
     maxSize: 4,
     openRoles: ["Strategy Lead"],
     workingStyleSummary: "Structured, high-output, deadline-driven",
-    status: "Partial",
+    status: "Open",
   },
   {
     id: "t3",
@@ -410,7 +410,7 @@ export const teams: Team[] = [
     maxSize: 4,
     openRoles: ["Technical Builder"],
     workingStyleSummary: "Business-oriented, structured, communicative",
-    status: "Partial",
+    status: "Open",
   },
   {
     id: "t10",
@@ -518,9 +518,8 @@ export const teams: Team[] = [
     maxSize: 4,
     openRoles: ["Technical Builder"],
     workingStyleSummary: "Globally-minded, communicative, rigorous",
-    status: "Partial",
+    status: "Open",
   },
-  // Project p6 – Emerging Market Entry Strategy
   {
     id: "t17",
     projectId: "p6",
@@ -580,7 +579,7 @@ export const teams: Team[] = [
     maxSize: 4,
     openRoles: ["Strategy Lead"],
     workingStyleSummary: "Mission-driven, collaborative, rigorous",
-    status: "Partial",
+    status: "Open",
   },
   {
     id: "t5",
@@ -623,7 +622,7 @@ export const teams: Team[] = [
     maxSize: 4,
     openRoles: ["Strategy Lead"],
     workingStyleSummary: "Technical depth with clear structure",
-    status: "Partial",
+    status: "Open",
   },
 ];
 

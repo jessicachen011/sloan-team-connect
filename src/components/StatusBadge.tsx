@@ -13,7 +13,6 @@ const statusConfig: Record<string, { label: string; className: string }> = {
   "In Conversations": { label: "Chatting", className: "badge-partial" },
   Committed: { label: "Committed", className: "badge-committed" },
   Open: { label: "Open", className: "badge-available" },
-  Partial: { label: "Partial", className: "badge-partial" },
   Full: { label: "Full", className: "badge-full" },
 };
 

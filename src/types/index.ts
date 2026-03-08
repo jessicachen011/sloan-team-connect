@@ -1,5 +1,5 @@
 export type TeamStatus = "Available" | "In Conversations" | "Committed";
-export type TeamCardStatus = "Open" | "Partial" | "Full";
+export type TeamCardStatus = "Open" | "Full";
 export type Program = "MBA" | "MBAn" | "LGO" | "MFin" | "MSMS" | "PhD";
 
 export interface Student {

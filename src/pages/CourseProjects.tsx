@@ -14,10 +14,15 @@ const statusConfig: Record<string, string> = {
 const CourseProjects: React.FC = () => {
   const navigate = useNavigate();
   const { courseId } = useParams<{ courseId: string }>();
-  const { courses, projects, setSelectedProject } = useApp();
+  const { courses, projects, teams, setSelectedProject } = useApp();
 
   const course = courses.find(c => c.id === courseId);
   const courseProjects = projects.filter(p => p.courseId === courseId);
+  // Compute open team counts dynamically from actual teams data
+  const getOpenTeamCount = (projectId: string) =>
+    teams.filter(t => t.projectId === projectId && t.status === "Open").length;
+  const getTotalTeamCount = (projectId: string) =>
+    teams.filter(t => t.projectId === projectId).length;
 
   const handleProject = (projectId: string) => {
     setSelectedProject(projectId);
@@ -74,9 +79,9 @@ const CourseProjects: React.FC = () => {
                     <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{project.description}</p>
 
                     <div className="flex items-center gap-4 mt-3">
-                      <span className="text-xs text-muted-foreground">{project.teamCount} teams total</span>
-                      {project.openTeamCount > 0 ? (
-                        <span className="text-xs font-semibold text-status-available">{project.openTeamCount} teams open</span>
+                      <span className="text-xs text-muted-foreground">{getTotalTeamCount(project.id)} teams total</span>
+                      {getOpenTeamCount(project.id) > 0 ? (
+                        <span className="text-xs font-semibold text-status-available">{getOpenTeamCount(project.id)} teams open</span>
                       ) : (
                         <span className="text-xs font-semibold text-status-full">All full</span>
                       )}
