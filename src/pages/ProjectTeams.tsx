@@ -13,8 +13,9 @@ const ProjectTeams: React.FC = () => {
   const {
     projects, teams, students, courses,
     setSelectedStudent, committedTeamId, pendingTeamIds, requestToJoinTeam,
-    setActiveConversation, conversations, currentUserId, sendMessage,
+    setActiveConversation, conversations, currentUserId, sendMessage, openOrCreateDM,
   } = useApp();
+
 
   const course = courses.find(c => c.id === courseId);
   const project = projects.find(p => p.id === projectId);
