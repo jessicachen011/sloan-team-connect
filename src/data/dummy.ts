@@ -266,9 +266,7 @@ export const projects: Project[] = [
     teamCount: 2,
     openTeamCount: 1,
     status: "Active",
-    deadline: "Feb 21, 2025",
-  },
-  // 15.573 Generative AI for Managers
+    deadline: "Feb 21, 2026",
   {
     id: "p8",
     courseId: "c3",
