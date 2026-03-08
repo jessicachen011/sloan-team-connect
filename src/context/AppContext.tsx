@@ -21,6 +21,7 @@ interface AppState {
   selectedTeamId: string | null;
   selectedStudentId: string | null;
   activeConversationId: string | null;
+  messageEnteredFromList: boolean;
   committedTeamId: string | null;
   pendingTeamIds: string[];
   isOnboarded: boolean;
@@ -35,7 +36,7 @@ interface AppActions {
   setSelectedProject: (id: string | null) => void;
   setSelectedTeam: (id: string | null) => void;
   setSelectedStudent: (id: string | null) => void;
-  setActiveConversation: (id: string | null) => void;
+  setActiveConversation: (id: string | null, fromList?: boolean) => void;
   joinTeam: (teamId: string) => void;
   requestToJoinTeam: (teamId: string) => void;
   sendMessage: (conversationId: string | null, receiverId: string, content: string) => void;
@@ -63,6 +64,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     selectedTeamId: null,
     selectedStudentId: null,
     activeConversationId: null,
+    messageEnteredFromList: false,
     committedTeamId: null,
     pendingTeamIds: [],
     isOnboarded: false,
@@ -76,9 +78,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setSelectedProject = useCallback((id: string | null) => setState(s => ({ ...s, selectedProjectId: id })), []);
   const setSelectedTeam = useCallback((id: string | null) => setState(s => ({ ...s, selectedTeamId: id })), []);
   const setSelectedStudent = useCallback((id: string | null) => setState(s => ({ ...s, selectedStudentId: id })), []);
-  const setActiveConversation = useCallback((id: string | null) => setState(s => ({
+  const setActiveConversation = useCallback((id: string | null, fromList: boolean = false) => setState(s => ({
     ...s,
     activeConversationId: id,
+    messageEnteredFromList: fromList,
     conversations: id
       ? s.conversations.map(c => c.id === id ? { ...c, unread: 0, messages: c.messages.map(m => ({ ...m, read: true })) } : c)
       : s.conversations,

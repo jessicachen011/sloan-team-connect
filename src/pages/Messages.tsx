@@ -11,6 +11,7 @@ const Messages: React.FC = () => {
   const {
     conversations, students, sendMessage,
     activeConversationId, setActiveConversation, currentUserId,
+    messageEnteredFromList,
   } = useApp();
 
   const [input, setInput] = useState("");
@@ -84,7 +85,7 @@ const Messages: React.FC = () => {
               return (
                 <button
                   key={conv.id}
-                  onClick={() => setActiveConversation(conv.id)}
+                  onClick={() => setActiveConversation(conv.id, true)}
                   className={cn(
                     "w-full text-left flex items-center gap-3 bg-card rounded-xl border p-4 card-shadow transition-all hover:border-primary/30 active:scale-[0.99]",
                     conv.unread > 0 ? "border-primary/30 bg-primary/5" : "border-border"
@@ -139,7 +140,10 @@ const Messages: React.FC = () => {
         {/* Header */}
         <div className="header-gradient px-5 pt-12 pb-4 flex-shrink-0">
           <button
-            onClick={() => setActiveConversation(null)}
+            onClick={() => {
+              setActiveConversation(null);
+              if (!messageEnteredFromList) navigate(-1);
+            }}
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-3 -ml-1"
           >
             <ArrowLeft size={16} />
