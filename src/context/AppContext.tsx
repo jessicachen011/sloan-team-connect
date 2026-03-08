@@ -192,7 +192,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ...state,
       login, setOnboarded, setSelectedCourse, setSelectedProject, setSelectedTeam,
       setSelectedStudent, setActiveConversation, joinTeam, requestToJoinTeam, sendMessage,
-      addCourse, removeCourse, updateProfile, updateAvatar, getCurrentUser,
+      openOrCreateDM, addCourse, removeCourse, updateProfile, updateAvatar, getCurrentUser,
     }}>
       {children}
     </AppContext.Provider>
