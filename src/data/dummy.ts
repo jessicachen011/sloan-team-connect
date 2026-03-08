@@ -614,6 +614,8 @@ export const teams: Team[] = [
     openRoles: ["Strategy Lead"],
     workingStyleSummary: "Technical depth with clear structure",
     status: "Open",
+  },
+];
 
 export const conversations: Conversation[] = [
   {
