@@ -513,6 +513,7 @@ export const teams: Team[] = [
     openRoles: ["Technical Builder"],
     workingStyleSummary: "Globally-minded, communicative, rigorous",
     status: "Open",
+  },
   {
     id: "t17",
     projectId: "p6",
