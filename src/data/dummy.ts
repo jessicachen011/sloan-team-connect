@@ -258,10 +258,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 1,
     status: "Filling Fast",
-    deadline: "Feb 21, 2025",
-  },
-  {
-    id: "p7",
+    deadline: "Feb 21, 2026",
     courseId: "c2",
     title: "Currency Risk & Corporate Hedging",
     description: "Analyze FX exposure and recommend hedging strategies for a multinational corporation.",
