@@ -119,7 +119,6 @@ const SearchStudents: React.FC = () => {
             <span>Back</span>
           </button>
           <h1 className="text-xl font-bold text-primary-foreground">Find Teammates</h1>
-          <p className="text-sm text-primary-foreground/70 mt-1">Search {otherStudents.length} Sloan students</p>
         </div>
 
         <div className="px-5 pt-5 flex flex-col gap-3">

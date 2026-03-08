@@ -28,13 +28,14 @@ const SignIn: React.FC = () => {
       {/* Top gradient band */}
       <div className="header-gradient h-2 w-full" />
 
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 animate-fade-in">
+    <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 animate-fade-in">
         {/* Single logo — large and prominent */}
         <div className="mb-10 flex flex-col items-center gap-2">
           <img src={logoSrc} alt="SloanSync" className="h-20 w-auto" />
           <h1 className="text-4xl font-extrabold text-primary tracking-tight">SloanSync</h1>
           <p className="text-sm text-muted-foreground tracking-wide font-medium">MIT Sloan · Team Formation Platform</p>
         </div>
+
 
         {/* Card */}
         <div className="w-full max-w-sm bg-card rounded-2xl card-shadow p-7 border border-border">
