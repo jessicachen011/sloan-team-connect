@@ -512,9 +512,7 @@ export const teams: Team[] = [
     maxSize: 4,
     openRoles: ["Technical Builder"],
     workingStyleSummary: "Globally-minded, communicative, rigorous",
-    status: "Partial",
-  },
-  // Project p6 – Emerging Market Entry Strategy
+    status: "Open",
   {
     id: "t17",
     projectId: "p6",
