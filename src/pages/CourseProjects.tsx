@@ -14,7 +14,7 @@ const statusConfig: Record<string, string> = {
 const CourseProjects: React.FC = () => {
   const navigate = useNavigate();
   const { courseId } = useParams<{ courseId: string }>();
-  const { courses, projects, setSelectedProject } = useApp();
+  const { courses, projects, teams, setSelectedProject } = useApp();
 
   const course = courses.find(c => c.id === courseId);
   const courseProjects = projects.filter(p => p.courseId === courseId);
