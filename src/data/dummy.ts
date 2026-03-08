@@ -572,10 +572,7 @@ export const teams: Team[] = [
     maxSize: 4,
     openRoles: ["Strategy Lead"],
     workingStyleSummary: "Mission-driven, collaborative, rigorous",
-    status: "Partial",
-  },
-  {
-    id: "t5",
+    status: "Open",
     projectId: "p8",
     name: "HealthPath",
     members: [
