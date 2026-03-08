@@ -145,12 +145,12 @@ const Messages: React.FC = () => {
             <ArrowLeft size={16} />
             <span>Back to Messages</span>
           </button>
-          {other && (
+          {/* 1:1 DM header */}
+          {!isGroup && other && (
             <div className="flex items-center gap-3">
               <AvatarChip initials={other.avatar} name={other.name} size="sm" avatarUrl={other.avatarUrl} className="!w-9 !h-9 text-xs" />
               <div>
                 <p className="font-bold text-primary-foreground text-sm">{other.name}</p>
-                {/* Online/Offline only — no team status in chat */}
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-status-available inline-block" />
                   <span className="text-xs text-primary-foreground/70">Online</span>
@@ -162,6 +162,23 @@ const Messages: React.FC = () => {
               >
                 View Profile
               </button>
+            </div>
+          )}
+          {/* Group chat header */}
+          {isGroup && (
+            <div className="flex items-center gap-3">
+              <div className="relative w-10 h-10 flex-shrink-0">
+                {groupParts.slice(0, 2).map((p, idx) => (
+                  <AvatarChip key={p!.id} initials={p!.avatar} name={p!.name} size="sm" avatarUrl={p!.avatarUrl}
+                    className={cn("!w-7 !h-7 text-[10px] absolute border-2 border-primary", idx === 0 ? "top-0 left-0" : "bottom-0 right-0")} />
+                ))}
+              </div>
+              <div>
+                <p className="font-bold text-primary-foreground text-sm">{convLabel}</p>
+                <p className="text-xs text-primary-foreground/70 mt-0.5">
+                  Team Chat · {activeConv.participantIds.length} members
+                </p>
+              </div>
             </div>
           )}
         </div>
