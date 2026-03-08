@@ -13,7 +13,7 @@ const ProjectTeams: React.FC = () => {
   const {
     projects, teams, students, courses,
     setSelectedStudent, committedTeamId, pendingTeamIds, requestToJoinTeam,
-    currentUserId, openOrCreateDM,
+    currentUserId, openOrCreateDM, openOrCreateGroupChat,
   } = useApp();
 
 
