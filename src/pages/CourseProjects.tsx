@@ -79,9 +79,9 @@ const CourseProjects: React.FC = () => {
                     <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{project.description}</p>
 
                     <div className="flex items-center gap-4 mt-3">
-                      <span className="text-xs text-muted-foreground">{project.teamCount} teams total</span>
-                      {project.openTeamCount > 0 ? (
-                        <span className="text-xs font-semibold text-status-available">{project.openTeamCount} teams open</span>
+                      <span className="text-xs text-muted-foreground">{getTotalTeamCount(project.id)} teams total</span>
+                      {getOpenTeamCount(project.id) > 0 ? (
+                        <span className="text-xs font-semibold text-status-available">{getOpenTeamCount(project.id)} teams open</span>
                       ) : (
                         <span className="text-xs font-semibold text-status-full">All full</span>
                       )}
