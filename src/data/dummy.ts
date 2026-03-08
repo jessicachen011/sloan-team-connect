@@ -287,10 +287,7 @@ export const projects: Project[] = [
     teamCount: 3,
     openTeamCount: 2,
     status: "Active",
-    deadline: "Feb 7, 2025",
-  },
-  {
-    id: "p10",
+    deadline: "Feb 7, 2026",
     courseId: "c3",
     title: "Responsible AI Governance Framework",
     description: "Develop a practical AI governance playbook for a regulated industry.",
