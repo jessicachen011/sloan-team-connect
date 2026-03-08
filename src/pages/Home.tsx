@@ -51,7 +51,7 @@ const Home: React.FC = () => {
         <div className="px-5 mt-6">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-base font-bold text-foreground">My Courses</h2>
-            <span className="text-xs text-muted-foreground font-medium">Spring 2025</span>
+            <span className="text-xs text-muted-foreground font-medium">Spring 2026</span>
           </div>
 
           <div className="flex flex-col gap-3">
