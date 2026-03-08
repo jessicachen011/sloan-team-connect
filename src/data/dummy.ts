@@ -365,6 +365,9 @@ export const teams: Team[] = [
     openRoles: ["Strategy Lead"],
     workingStyleSummary: "Structured, high-output, deadline-driven",
     status: "Open",
+  },
+  {
+    id: "t3",
     projectId: "p1",
     name: "Inference Engine",
     members: [
@@ -408,6 +411,9 @@ export const teams: Team[] = [
     openRoles: ["Technical Builder"],
     workingStyleSummary: "Business-oriented, structured, communicative",
     status: "Open",
+  },
+  {
+    id: "t10",
     projectId: "p2",
     name: "Model Mavericks",
     members: [
