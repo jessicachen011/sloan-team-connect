@@ -78,9 +78,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setSelectedProject = useCallback((id: string | null) => setState(s => ({ ...s, selectedProjectId: id })), []);
   const setSelectedTeam = useCallback((id: string | null) => setState(s => ({ ...s, selectedTeamId: id })), []);
   const setSelectedStudent = useCallback((id: string | null) => setState(s => ({ ...s, selectedStudentId: id })), []);
-  const setActiveConversation = useCallback((id: string | null) => setState(s => ({
+  const setActiveConversation = useCallback((id: string | null, fromList: boolean = false) => setState(s => ({
     ...s,
     activeConversationId: id,
+    messageEnteredFromList: fromList,
     conversations: id
       ? s.conversations.map(c => c.id === id ? { ...c, unread: 0, messages: c.messages.map(m => ({ ...m, read: true })) } : c)
       : s.conversations,
