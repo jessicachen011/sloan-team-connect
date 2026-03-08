@@ -21,7 +21,7 @@ const ProjectTeams: React.FC = () => {
   const project = projects.find(p => p.id === projectId);
   const projectTeams = teams.filter(t => t.projectId === projectId);
 
-  const openTeamCount = projectTeams.filter(t => t.status === "Open" || t.status === "Partial").length;
+  const openTeamCount = projectTeams.filter(t => t.status === "Open").length;
 
   // 1:1 DM — find or create conversation, then navigate
   const handleDM = (studentId: string) => {
