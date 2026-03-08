@@ -565,7 +565,7 @@ export const teams: Team[] = [
     workingStyleSummary: "Quantitative, finance-oriented, detail-driven",
     status: "Open",
   },
-  // Project p8 – Healthcare AI Workflow Assistant
+  // Project p8 – Healthcare AI Workflow Assistant (1 open, 2 full)
   {
     id: "t4",
     projectId: "p8",
@@ -574,12 +574,13 @@ export const teams: Team[] = [
       { studentId: "s7", role: "Research" },
       { studentId: "s5", role: "Technical Builder" },
       { studentId: "s2", role: "Analytics / Modeling" },
+      { studentId: "s4", role: "Strategy Lead" },
     ],
-    currentSize: 3,
+    currentSize: 4,
     maxSize: 4,
-    openRoles: ["Strategy Lead"],
+    openRoles: [],
     workingStyleSummary: "Mission-driven, collaborative, rigorous",
-    status: "Open",
+    status: "Full",
   },
   {
     id: "t5",
@@ -594,7 +595,23 @@ export const teams: Team[] = [
     workingStyleSummary: "Structured and execution-focused",
     status: "Open",
   },
-  // Project p9 – Enterprise AI Recommendation System
+  {
+    id: "t20",
+    projectId: "p8",
+    name: "CliniCore",
+    members: [
+      { studentId: "s6", role: "Strategy Lead" },
+      { studentId: "s8", role: "Analytics / Modeling" },
+      { studentId: "s1", role: "PM / Coordinator" },
+      { studentId: "s3", role: "Technical Builder" },
+    ],
+    currentSize: 4,
+    maxSize: 4,
+    openRoles: [],
+    workingStyleSummary: "Execution-first, data-driven, communicative",
+    status: "Full",
+  },
+  // Project p9 – Enterprise AI Recommendation System (2 open, 1 full)
   {
     id: "t6",
     projectId: "p9",
@@ -623,6 +640,55 @@ export const teams: Team[] = [
     openRoles: ["Strategy Lead"],
     workingStyleSummary: "Technical depth with clear structure",
     status: "Open",
+  },
+  {
+    id: "t21",
+    projectId: "p9",
+    name: "ProcureAI",
+    members: [
+      { studentId: "s3", role: "PM / Coordinator" },
+      { studentId: "s7", role: "Research" },
+      { studentId: "s1", role: "Strategy Lead" },
+      { studentId: "s4", role: "Analytics / Modeling" },
+    ],
+    currentSize: 4,
+    maxSize: 4,
+    openRoles: [],
+    workingStyleSummary: "Structured, policy-aware, cross-functional",
+    status: "Full",
+  },
+  // Project p10 – Responsible AI Governance Framework (all full)
+  {
+    id: "t22",
+    projectId: "p10",
+    name: "Policy Architects",
+    members: [
+      { studentId: "s7", role: "Research" },
+      { studentId: "s6", role: "Strategy Lead" },
+      { studentId: "s4", role: "Analytics / Modeling" },
+      { studentId: "s3", role: "PM / Coordinator" },
+    ],
+    currentSize: 4,
+    maxSize: 4,
+    openRoles: [],
+    workingStyleSummary: "Policy-first, rigorous, stakeholder-savvy",
+    status: "Full",
+  },
+  {
+    id: "t23",
+    projectId: "p10",
+    name: "Governance Lab",
+    members: [
+      { studentId: "s2", role: "Analytics / Modeling" },
+      { studentId: "s8", role: "Technical Builder" },
+      { studentId: "s5", role: "Technical Builder" },
+      { studentId: "s1", role: "Strategy Lead" },
+    ],
+    currentSize: 4,
+    maxSize: 4,
+    openRoles: [],
+    workingStyleSummary: "Technical depth meets governance thinking",
+    status: "Full",
   },
 ];
 
