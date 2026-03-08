@@ -23,6 +23,18 @@ const Messages: React.FC = () => {
     return students.find(s => s.id === otherId);
   };
 
+  const isGroupConv = (conv: typeof conversations[0]) => conv.participantIds.length > 2;
+
+  const getGroupParticipants = (conv: typeof conversations[0]) =>
+    conv.participantIds.filter(id => id !== currentUserId).map(id => students.find(s => s.id === id)).filter(Boolean);
+
+  const getConvLabel = (conv: typeof conversations[0]) => {
+    if (isGroupConv(conv)) {
+      return getGroupParticipants(conv).map(s => s!.name.split(" ")[0]).join(", ");
+    }
+    return getOtherParticipant(conv)?.name ?? "Unknown";
+  };
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [activeConv?.messages.length]);
