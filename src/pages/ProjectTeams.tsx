@@ -44,11 +44,11 @@ const ProjectTeams: React.FC = () => {
         {/* Header */}
         <div className="header-gradient px-5 pt-12 pb-7">
           <button
-            onClick={() => navigate(`/courses/${courseId}/projects`)}
+            onClick={() => navigate(-1)}
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-4 -ml-1"
           >
             <ArrowLeft size={16} />
-            <span>Back to Projects</span>
+            <span>Back</span>
           </button>
           <span className="text-xs font-bold text-primary-foreground/60 uppercase tracking-widest">{course?.number} · {project.theme}</span>
           <h1 className="text-xl font-bold text-primary-foreground mt-0.5 leading-tight">{project.title}</h1>
