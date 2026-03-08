@@ -31,17 +31,23 @@ const ProjectTeams: React.FC = () => {
     navigate("/messages");
   };
 
-  // Open group chat: send a stub message to the first member that isn't the current user,
-  // and navigate to messages (simulated group chat — frontend-only)
+  // Open group chat: find or create a conversation that includes the current user
+  // and ALL other team members (frontend-only group chat simulation)
   const handleGroupChat = (memberStudentIds: string[]) => {
-    const others = memberStudentIds.filter(id => id !== currentUserId);
+    const allIds = Array.from(new Set([currentUserId, ...memberStudentIds]));
+    const others = allIds.filter(id => id !== currentUserId);
     if (others.length === 0) return;
-    // For demo: open or start a conversation with the first member
-    const firstOther = others[0];
-    const conv = conversations.find(c =>
-      c.participantIds.includes(currentUserId) && c.participantIds.includes(firstOther)
+    // Find an existing conversation that has exactly all these participants
+    const existing = conversations.find(c =>
+      allIds.every(id => c.participantIds.includes(id)) &&
+      c.participantIds.length === allIds.length
     );
-    setActiveConversation(conv?.id ?? null);
+    if (existing) {
+      setActiveConversation(existing.id);
+    } else {
+      // Create a new group conversation by sending a stub opening message
+      sendMessage(null, others[0], `👋 Hey team! Let's connect.`);
+    }
     navigate("/messages");
   };
 
