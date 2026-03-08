@@ -298,6 +298,7 @@ export const projects: Project[] = [
     openTeamCount: 0,
     status: "Full",
     deadline: "Feb 7, 2026",
+  },
   {
     id: "p11",
     courseId: "c4",
