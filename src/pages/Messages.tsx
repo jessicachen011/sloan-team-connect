@@ -85,7 +85,7 @@ const Messages: React.FC = () => {
               return (
                 <button
                   key={conv.id}
-                  onClick={() => setActiveConversation(conv.id)}
+                  onClick={() => setActiveConversation(conv.id, true)}
                   className={cn(
                     "w-full text-left flex items-center gap-3 bg-card rounded-xl border p-4 card-shadow transition-all hover:border-primary/30 active:scale-[0.99]",
                     conv.unread > 0 ? "border-primary/30 bg-primary/5" : "border-border"
