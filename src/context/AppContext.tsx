@@ -39,6 +39,7 @@ interface AppActions {
   joinTeam: (teamId: string) => void;
   requestToJoinTeam: (teamId: string) => void;
   sendMessage: (conversationId: string | null, receiverId: string, content: string) => void;
+  openOrCreateDM: (receiverId: string) => string;
   addCourse: (courseId: string) => void;
   removeCourse: (courseId: string) => void;
   updateProfile: (updates: Partial<Student>) => void;
