@@ -21,6 +21,7 @@ interface AppState {
   selectedTeamId: string | null;
   selectedStudentId: string | null;
   activeConversationId: string | null;
+  messageEnteredFromList: boolean;
   committedTeamId: string | null;
   pendingTeamIds: string[];
   isOnboarded: boolean;
