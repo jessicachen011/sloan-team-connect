@@ -139,7 +139,7 @@ const Messages: React.FC = () => {
         {/* Header */}
         <div className="header-gradient px-5 pt-12 pb-4 flex-shrink-0">
           <button
-            onClick={() => { setActiveConversation(null); navigate(-1); }}
+            onClick={() => setActiveConversation(null)}
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-3 -ml-1"
           >
             <ArrowLeft size={16} />
