@@ -110,7 +110,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           ...t,
           members: updatedMembers,
           currentSize: newSize,
-          status: newSize >= t.maxSize ? "Full" : newSize >= 2 ? "Partial" : "Open",
+          status: newSize >= t.maxSize ? "Full" : "Open",
         } as Team;
       });
       const newStudents = s.students.map(st =>
