@@ -580,6 +580,9 @@ export const teams: Team[] = [
     openRoles: ["Strategy Lead"],
     workingStyleSummary: "Mission-driven, collaborative, rigorous",
     status: "Open",
+  },
+  {
+    id: "t5",
     projectId: "p8",
     name: "HealthPath",
     members: [
