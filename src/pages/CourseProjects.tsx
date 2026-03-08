@@ -18,6 +18,11 @@ const CourseProjects: React.FC = () => {
 
   const course = courses.find(c => c.id === courseId);
   const courseProjects = projects.filter(p => p.courseId === courseId);
+  // Compute open team counts dynamically from actual teams data
+  const getOpenTeamCount = (projectId: string) =>
+    teams.filter(t => t.projectId === projectId && t.status === "Open").length;
+  const getTotalTeamCount = (projectId: string) =>
+    teams.filter(t => t.projectId === projectId).length;
 
   const handleProject = (projectId: string) => {
     setSelectedProject(projectId);

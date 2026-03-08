@@ -106,7 +106,7 @@ const ProjectTeams: React.FC = () => {
                   {/* Progress bar */}
                   <div className="mt-3 w-full h-1.5 bg-secondary rounded-full overflow-hidden">
                     <div
-                      className={cn("h-full rounded-full transition-all", isFull ? "bg-status-full" : team.status === "Partial" ? "bg-status-partial" : "bg-status-available")}
+                      className={cn("h-full rounded-full transition-all", isFull ? "bg-status-full" : "bg-status-available")}
                       style={{ width: `${(team.currentSize / team.maxSize) * 100}%` }}
                     />
                   </div>
