@@ -23,39 +23,18 @@ const ProjectTeams: React.FC = () => {
 
   const openTeamCount = projectTeams.filter(t => t.status === "Open" || t.status === "Partial").length;
 
-  // 1:1 DM — find existing convo or create one
+  // 1:1 DM — find or create conversation, then navigate
   const handleDM = (studentId: string) => {
-    const existing = conversations.find(c =>
-      c.participantIds.length === 2 &&
-      c.participantIds.includes(currentUserId) &&
-      c.participantIds.includes(studentId)
-    );
-    if (existing) {
-      setActiveConversation(existing.id);
-      navigate("/messages");
-    } else {
-      sendMessage(null, studentId, "👋 Hey! Saw you on the team — would love to connect.");
-      navigate("/messages");
-    }
+    openOrCreateDM(studentId);
+    navigate("/messages");
   };
 
-  // Group chat — find existing convo with all members or create one
+  // Group chat — open DM with first non-current member (simulated group)
   const handleGroupChat = (memberStudentIds: string[]) => {
-    const allIds = Array.from(new Set([currentUserId, ...memberStudentIds]));
-    const others = allIds.filter(id => id !== currentUserId);
+    const others = memberStudentIds.filter(id => id !== currentUserId);
     if (others.length === 0) return;
-    const existing = conversations.find(c =>
-      allIds.every(id => c.participantIds.includes(id)) &&
-      c.participantIds.length === allIds.length
-    );
-    if (existing) {
-      setActiveConversation(existing.id);
-      navigate("/messages");
-    } else {
-      // Create group by messaging all others; uses first as receiver for the conv stub
-      sendMessage(null, others[0], "👋 Hey team! Interested in working together.");
-      navigate("/messages");
-    }
+    openOrCreateDM(others[0]);
+    navigate("/messages");
   };
 
   if (!project) return null;
