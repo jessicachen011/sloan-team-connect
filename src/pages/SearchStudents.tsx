@@ -230,8 +230,6 @@ const SearchStudents: React.FC = () => {
             </div>
           )}
 
-          {/* Results count */}
-          <p className="text-xs text-muted-foreground font-medium">{filtered.length} students</p>
 
           {/* Student cards */}
           <div className="flex flex-col gap-3 pb-6">
