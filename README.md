@@ -1,8 +1,10 @@
-# Welcome to your Lovable project
+# SloanSync
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Live App**: https://sloansync.lovable.app
+
+**Lovable Project**: https://lovable.dev/projects/2dd455a8-bdde-4044-83c4-db679d49fa12
 
 ## How can I edit this code?
 
@@ -10,7 +12,7 @@ There are several ways of editing your application.
 
 **Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Simply visit the [Lovable Project](https://lovable.dev/projects/2dd455a8-bdde-4044-83c4-db679d49fa12) and start prompting.
 
 Changes made via Lovable will be committed automatically to this repo.
 
