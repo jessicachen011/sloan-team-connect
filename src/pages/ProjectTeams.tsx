@@ -44,7 +44,7 @@ const ProjectTeams: React.FC = () => {
         {/* Header */}
         <div className="header-gradient px-5 pt-12 pb-7">
           <button
-            onClick={() => navigate(`/courses/${courseId}/projects`)}
+            onClick={() => navigate(-1)}
             className="flex items-center gap-1.5 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-4 -ml-1"
           >
             <ArrowLeft size={16} />
