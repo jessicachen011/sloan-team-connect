@@ -687,6 +687,72 @@ export const teams: Team[] = [
     workingStyleSummary: "Technical depth meets governance thinking",
     status: "Full",
   },
+  // Project p11 – Consumer Behavior Attribution Model (all full)
+  {
+    id: "t24",
+    projectId: "p11",
+    name: "Attribution Alpha",
+    members: [
+      { studentId: "s4", role: "Analytics / Modeling" },
+      { studentId: "s2", role: "Technical Builder" },
+      { studentId: "s6", role: "Strategy Lead" },
+      { studentId: "s3", role: "PM / Coordinator" },
+    ],
+    currentSize: 4,
+    maxSize: 4,
+    openRoles: [],
+    workingStyleSummary: "Data-driven, consumer-first, structured",
+    status: "Full",
+  },
+  {
+    id: "t25",
+    projectId: "p11",
+    name: "TouchPoint",
+    members: [
+      { studentId: "s8", role: "Analytics / Modeling" },
+      { studentId: "s5", role: "Technical Builder" },
+      { studentId: "s7", role: "Research" },
+      { studentId: "s1", role: "Strategy Lead" },
+    ],
+    currentSize: 4,
+    maxSize: 4,
+    openRoles: [],
+    workingStyleSummary: "Rigorous, fast-moving, cross-functional",
+    status: "Full",
+  },
+  // Project p12 – Personalization Engine Prototype (all full)
+  {
+    id: "t26",
+    projectId: "p12",
+    name: "PersonaCore",
+    members: [
+      { studentId: "s5", role: "Technical Builder" },
+      { studentId: "s4", role: "Analytics / Modeling" },
+      { studentId: "s6", role: "Presentation / Storytelling" },
+      { studentId: "s3", role: "PM / Coordinator" },
+    ],
+    currentSize: 4,
+    maxSize: 4,
+    openRoles: [],
+    workingStyleSummary: "Creative, consumer-focused, execution-driven",
+    status: "Full",
+  },
+  {
+    id: "t27",
+    projectId: "p12",
+    name: "RecoEngine",
+    members: [
+      { studentId: "s2", role: "Technical Builder" },
+      { studentId: "s8", role: "Analytics / Modeling" },
+      { studentId: "s7", role: "Research" },
+      { studentId: "s1", role: "Strategy Lead" },
+    ],
+    currentSize: 4,
+    maxSize: 4,
+    openRoles: [],
+    workingStyleSummary: "ML-first, data-rigorous, collaborative",
+    status: "Full",
+  },
 ];
 
 export const conversations: Conversation[] = [
