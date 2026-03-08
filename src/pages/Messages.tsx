@@ -11,6 +11,7 @@ const Messages: React.FC = () => {
   const {
     conversations, students, sendMessage,
     activeConversationId, setActiveConversation, currentUserId,
+    messageEnteredFromList,
   } = useApp();
 
   const [input, setInput] = useState("");
